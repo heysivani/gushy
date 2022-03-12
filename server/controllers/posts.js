@@ -2,10 +2,9 @@ import PostMessage from "../models/postMessage.js";
 
 export const getPosts =
   ("/",
-  (req, res) => {
+  async (req, res) => {
     try {
-      const postMessages = PostMessage.find();
-      console.log(`postMessages: ${postMessages}`);
+      const postMessages = await PostMessage.find();
       res.status(200).json(postMessages);
     } catch (error) {
       res.status(404).json({ message: error.message });
@@ -14,7 +13,14 @@ export const getPosts =
 
 export const createPost =
   ("/",
-  (req, res) => {
-    console.log("testing");
-    res.send("create post");
+  async (req, res) => {
+    const post = req.body;
+    const newPost = new PostMessage(post);
+
+    try {
+      await newPost.save();
+      res.status(201).json(newPost);
+    } catch (error) {
+      res.status(409).json({ message: error.message });
+    }
   });

@@ -2,7 +2,11 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
+import postRoutes from "./routes/posts.js";
+
 const app = express();
+
+app.use("/posts", postRoutes);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
