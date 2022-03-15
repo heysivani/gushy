@@ -1,4 +1,6 @@
 import React from "react";
+import Posts from "./components/Posts.jsx";
+import Form from "./components/Form.jsx";
 
 const App = () => {
   // container
@@ -7,15 +9,22 @@ const App = () => {
   //      image
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <header>
-        <h1 className="text-yellow-300">App</h1>
+        <h1 className="text-3xl font-bold underline">App</h1>
         <img
           src="https://randomfox.ca/images/47.jpg"
-          alt=""
+          alt="A fox staring to the right, standing in grass. There are trees in the background."
           className="w-1/6"
         />
       </header>
+      <main>
+        <div className="container grid grid-cols-3">
+          <section>
+            <Posts />
+          </section>
+          <Form />
+        </div>
+      </main>
     </div>
   );
 };
