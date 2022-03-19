@@ -1,8 +1,9 @@
 import PostMessage from "../models/postMessage.js";
 
-export const getPosts =
+export const fetchPosts =
   ("/",
   async (req, res) => {
+    console.log("FETCH POSTS");
     try {
       const postMessages = await PostMessage.find();
       res.status(200).json(postMessages);
@@ -11,9 +12,10 @@ export const getPosts =
     }
   });
 
-export const createPost =
+export const addPost =
   ("/",
   async (req, res) => {
+    console.log("ADD POST");
     const post = req.body;
     const newPost = new PostMessage(post);
 
