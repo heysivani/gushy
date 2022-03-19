@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Posts from "./components/Posts.jsx";
 import Form from "./components/Form.jsx";
+import { useDispatch } from "react-redux";
+import { fetchPosts } from "./actions/posts";
 
 const App = () => {
-  // container
-  //    appbar
-  //      header
-  //      image
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPosts);
+  }, []);
+
   return (
     <div>
       <header>
