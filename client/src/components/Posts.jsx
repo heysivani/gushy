@@ -7,11 +7,14 @@ const Posts = () => {
 
   console.log(posts);
 
-  return (
-    <>
-      <h1>Posts</h1>
-      <Post />
-    </>
+  return !posts.length ? (
+    <p>Loading</p>
+  ) : (
+    posts.map((post) => (
+      <div key={post._id}>
+        <Post post={post} />
+      </div>
+    ))
   );
 };
 
