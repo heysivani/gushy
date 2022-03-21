@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
-import { addPost } from "../actions/posts";
+import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { addPost, updatePost } from "../actions/posts";
 
-const Form = () => {
+const Form = ({ currentId }) => {
   const dispatch = useDispatch();
+  const postToEdit = useSelector((state) =>
+    currentId ? state.posts.find((post) => post._id === currentId) : null
+  );
 
   const [post, setPost] = useState({
     creator: "",
@@ -14,9 +18,18 @@ const Form = () => {
     selectedFile: "",
   });
 
+  useEffect(() => {
+    if (postToEdit) setPost(postToEdit);
+  }, [postToEdit]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addPost(post));
+
+    if (currentId) {
+      dispatch(updatePost(currentId, post));
+    } else {
+      dispatch(addPost(post));
+    }
   };
 
   const clear = () => {};
@@ -155,6 +168,11 @@ const Form = () => {
       </div>
     </>
   );
+};
+
+Form.propTypes = {
+  currentId: PropTypes.string,
+  setCurrentId: PropTypes.func,
 };
 
 export default Form;

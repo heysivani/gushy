@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import calculateRelativeDays from "../utils/time-formatter";
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
   return (
     <article className="my-2 border-4 rounded-lg">
       <h1 className="text-xl text-stone-900 underline inline mx-1">
@@ -17,7 +17,12 @@ const Post = ({ post }) => {
         {post.tags.map((tag) => `#${tag} `)}
       </p>
       <img src={post.selectedFile} alt="" />
-      <button className="btn btn-blue mx-1 mt-1" onClick={() => {}}>
+      <button
+        className="btn btn-blue mx-1 mt-1"
+        onClick={() => {
+          setCurrentId(post._id);
+        }}
+      >
         Edit
       </button>
       <button className="btn btn-blue mx-1 mt-1" onClick={() => {}}>
@@ -32,6 +37,7 @@ const Post = ({ post }) => {
 
 Post.propTypes = {
   post: PropTypes.object,
+  setCurrentId: PropTypes.func,
 };
 
 export default Post;

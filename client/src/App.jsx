@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Posts from "./components/Posts.jsx";
 import Form from "./components/Form.jsx";
 import { useDispatch } from "react-redux";
@@ -6,6 +6,8 @@ import { fetchPosts } from "./actions/posts";
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
     dispatch(fetchPosts);
@@ -24,9 +26,9 @@ const App = () => {
       <main>
         <div className="container grid grid-cols-3">
           <section>
-            <Posts />
+            <Posts setCurrentId={setCurrentId} />
           </section>
-          <Form />
+          <Form currentId={currentId} setCurrentId={setCurrentId} />
         </div>
       </main>
     </div>
