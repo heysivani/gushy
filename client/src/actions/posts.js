@@ -36,3 +36,15 @@ export const updatePost = (id, post) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const deletePost = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.deletePost(id);
+    dispatch({
+      type: ACTIONS.DELETE_POST,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
