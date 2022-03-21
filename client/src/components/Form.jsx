@@ -4,19 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { addPost, updatePost } from "../actions/posts";
 
-const Form = ({ currentId }) => {
+const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const postToEdit = useSelector((state) =>
     currentId ? state.posts.find((post) => post._id === currentId) : null
   );
 
-  const [post, setPost] = useState({
+  const emptyPost = {
     creator: "",
     title: "",
     message: "",
     tags: "",
     selectedFile: "",
-  });
+  };
+
+  const [post, setPost] = useState(emptyPost);
 
   useEffect(() => {
     if (postToEdit) setPost(postToEdit);
@@ -30,14 +32,19 @@ const Form = ({ currentId }) => {
     } else {
       dispatch(addPost(post));
     }
+
+    clear();
   };
 
-  const clear = () => {};
+  const clear = () => {
+    setCurrentId(null);
+    setPost(emptyPost);
+  };
 
   return (
     <>
       <div className="">
-        <h6>Gush about something:</h6>
+        <h6>{currentId ? "Edit" : "Create"} post:</h6>
         <form action="" autoComplete="off" noValidate onSubmit={handleSubmit}>
           <label htmlFor="creator">Creator</label>
           <input
@@ -161,7 +168,7 @@ const Form = ({ currentId }) => {
           <button type="submit" className="btn btn-blue">
             Submit
           </button>
-          <button onClick={clear} className="btn btn-red">
+          <button type="reset" onClick={clear} className="btn btn-red">
             Clear
           </button>
         </form>

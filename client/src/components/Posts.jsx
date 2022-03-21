@@ -6,8 +6,6 @@ import Post from "./Post.jsx";
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts);
 
-  console.log(posts);
-
   return !posts.length ? (
     <p>Loading</p>
   ) : (
