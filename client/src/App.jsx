@@ -10,7 +10,7 @@ const App = () => {
   const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchPosts);
+    dispatch(fetchPosts());
   }, [currentId]);
 
   return (
