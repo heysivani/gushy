@@ -7,10 +7,6 @@ import { deletePost } from "../actions/posts";
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
-    dispatch(deletePost(post._id));
-  };
-
   return (
     <article className="my-2 border-4 rounded-lg">
       <h1 className="text-xl text-stone-900 underline inline mx-1">
@@ -36,7 +32,10 @@ const Post = ({ post, setCurrentId }) => {
       <button className="btn btn-blue mx-1 mt-1" onClick={() => {}}>
         Like
       </button>
-      <button className="btn btn-red mx-1 mt-1" onClick={handleDelete}>
+      <button
+        className="btn btn-red mx-1 mt-1"
+        onClick={() => dispatch(deletePost(post._id))}
+      >
         Delete
       </button>
     </article>
