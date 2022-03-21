@@ -43,6 +43,28 @@ export const updatePost = async (req, res) => {
   }
 };
 
+export const likePost = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(400).send("Invalid ID");
+
+  try {
+    const likedPost = await PostMessage.findByIdAndUpdate(
+      id,
+      {
+        $inc: { likeCount: 1 },
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json(likedPost);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
 export const deletePost = async (req, res) => {
   const { id } = req.params;
 
