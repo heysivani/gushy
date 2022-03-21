@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import calculateRelativeDays from "../utils/time-formatter";
-import { deletePost } from "../actions/posts";
+import { deletePost, likePost } from "../actions/posts";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
@@ -29,8 +29,13 @@ const Post = ({ post, setCurrentId }) => {
       >
         Edit
       </button>
-      <button className="btn btn-blue mx-1 mt-1" onClick={() => {}}>
-        Like
+      <button
+        className="btn btn-blue mx-1 mt-1"
+        onClick={() => {
+          dispatch(likePost(post._id));
+        }}
+      >
+        {post.likeCount} likes
       </button>
       <button
         className="btn btn-red mx-1 mt-1"
