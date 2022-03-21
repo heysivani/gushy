@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
 
 export const fetchPosts = async (req, res) => {
-  console.log("FETCH POSTS");
   try {
     const postMessages = await PostMessage.find();
     res.status(200).json(postMessages);
@@ -12,7 +11,6 @@ export const fetchPosts = async (req, res) => {
 };
 
 export const addPost = async (req, res) => {
-  console.log("ADD POST");
   const post = req.body;
   const newPost = new PostMessage(post);
 
@@ -31,8 +29,30 @@ export const updatePost = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(_id))
     return res.status(400).send("Invalid ID");
 
-  const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, {
-    new: true,
-  });
-  res.status(200).json(updatedPost);
+  try {
+    const updatedPost = await PostMessage.findByIdAndUpdate(
+      _id,
+      { ...post, _id },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+export const deletePost = async (req, res) => {
+  const { id: _id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(400).send("Invalid ID");
+
+  try {
+    const deletedPost = await PostMessage.findByIdAndDelete(_id);
+    res.status(200).json(deletedPost);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
 };
