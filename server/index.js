@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 
 app.use("/posts", postRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || PORT;
 
 mongoose
   .connect(process.env.CONNECTION_URL)
