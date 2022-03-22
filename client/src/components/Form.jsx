@@ -136,7 +136,9 @@ const Form = ({ currentId, setCurrentId }) => {
             id="tags"
             name="tags"
             value={post.tags}
-            onChange={(event) => setPost({ ...post, tags: event.target.value })}
+            onChange={(event) =>
+              setPost({ ...post, tags: event.target.value.split(/[, ]+/) })
+            }
             placeholder="tags"
             className="
                 form-control
