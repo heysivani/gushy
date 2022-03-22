@@ -10,6 +10,8 @@ app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 
 app.use("/posts", postRoutes);
 
+app.get("/", (req, res) => res.send("Gushy API"));
+
 const PORT = process.env.PORT || PORT;
 
 mongoose
