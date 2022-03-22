@@ -24,11 +24,11 @@ const App = () => {
         />
       </header>
       <main>
-        <div className="container grid grid-cols-3">
-          <section>
+        <div className="containe grid grid-cols-1 sm:grid-cols-2">
+          <Form currentId={currentId} setCurrentId={setCurrentId} />
+          <section className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <Posts setCurrentId={setCurrentId} />
           </section>
-          <Form currentId={currentId} setCurrentId={setCurrentId} />
         </div>
       </main>
     </div>

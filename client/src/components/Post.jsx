@@ -35,7 +35,7 @@ const Post = ({ post, setCurrentId }) => {
           dispatch(likePost(post._id));
         }}
       >
-        {post.likeCount} likes
+        {post.likeCount} like(s)
       </button>
       <button
         className="btn btn-red mx-1 mt-1"

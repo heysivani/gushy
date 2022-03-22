@@ -43,7 +43,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   return (
     <>
-      <div className="">
+      <div className="mt-2 mx-2">
         <h6>{currentId ? "Edit" : "Create"} post:</h6>
         <form action="" autoComplete="off" noValidate onSubmit={handleSubmit}>
           <label htmlFor="creator">Creator</label>
