@@ -2,6 +2,8 @@ import axios from "axios";
 
 const API = process.env.NETLIFY ? process.env.REACT_APP_API : "";
 
+console.log(`API = ${API}`);
+
 export const fetchPosts = () => axios.get(`${API}/posts`);
 export const addPost = (post) => axios.post(`${API}/posts`, post);
 export const updatePost = (id, post) => axios.patch(`${API}/posts/${id}`, post);
