@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = process.env.NETLIFY ? API : "";
+const API = process.env.NETLIFY ? process.env.API : "";
 
 export const fetchPosts = () => axios.get(`${API}/posts`);
 export const addPost = (post) => axios.post(`${API}/posts`, post);
