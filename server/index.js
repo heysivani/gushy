@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 
 import postRoutes from "./routes/posts.js";
 
@@ -7,6 +8,8 @@ const app = express();
 
 app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true, limit: "100mb" }));
+
+app.options("*", cors());
 
 app.use("/posts", postRoutes);
 
